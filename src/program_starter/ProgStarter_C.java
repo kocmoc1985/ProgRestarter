@@ -56,7 +56,7 @@ public class ProgStarter_C extends Standard {
                 //
                 if (running == false) {
                     HelpM.run_application_exe_or_jar(prog.getProgram_name(), prog.getPath());
-//                    SimpleLoggerLight11.logg(LOG_MAIN, prog.getProgram_name() + " --> " + prog.getPath());
+                    SimpleLoggerLight11.logg(LOG_MAIN, prog.getProgram_name() + " --> " + prog.getPath());
                 }
             } catch (IOException ex) {
                 Logger.getLogger(ProgStarter_A.class.getName()).log(Level.SEVERE, null, ex);
