@@ -1,0 +1,7 @@
+This program is for launching 1 or several programs in control session.
+
+[Adding programs to run]
+
+to add a new program to be run just add the new entry to the "main.properties" -> "program_to_run_3" if the previous was 2
+
+Note: first word = program name; Second word after the ";" = program path
