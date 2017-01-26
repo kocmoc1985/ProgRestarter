@@ -45,9 +45,18 @@ public class ProgStarter_C extends Standard {
 
         for (Program prog : list) {
             try {
-                if (HelpM.processRunning(prog.getProgram_name()) == false) {
+                //
+                boolean running;
+                //
+                if(DEFINE_WITH_QUERY){ // OBS the JavaSysmon lib not working for WIN2012 R2 SERVER
+                    running = HelpM.processRunningB(prog.getProgram_name());
+                }else{
+                    running = HelpM.processRunning(prog.getProgram_name());
+                }
+                //
+                if (running == false) {
                     HelpM.run_application_exe_or_jar(prog.getProgram_name(), prog.getPath());
-                    SimpleLoggerLight11.logg(LOG_MAIN, prog.getProgram_name() + " --> " + prog.getPath());
+//                    SimpleLoggerLight11.logg(LOG_MAIN, prog.getProgram_name() + " --> " + prog.getPath());
                 }
             } catch (IOException ex) {
                 Logger.getLogger(ProgStarter_A.class.getName()).log(Level.SEVERE, null, ex);

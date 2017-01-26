@@ -43,6 +43,7 @@ public class Standard implements Runnable {
     public boolean START_CHECK_B;
     public boolean START_CHECK_C;
     public boolean RUN_IN_CONSOLE;
+    public boolean DEFINE_WITH_QUERY;
     public String TRAY_INFO;
     public boolean SHOW_TRAY;
     //
@@ -116,6 +117,7 @@ public class Standard implements Runnable {
         START_CHECK_B = Boolean.parseBoolean(p.getProperty("start_check_b", "false"));
         START_CHECK_C = Boolean.parseBoolean(p.getProperty("start_check_c", "false"));
         RUN_IN_CONSOLE = Boolean.parseBoolean(p.getProperty("run_in_console", "false"));
+        DEFINE_WITH_QUERY = Boolean.parseBoolean(p.getProperty("define_process_with_query", "false"));
         TRAY_INFO = p.getProperty("tray_info", "MCStarter");
         SHOW_TRAY = Boolean.parseBoolean(p.getProperty("show_tray", "true"));
     }

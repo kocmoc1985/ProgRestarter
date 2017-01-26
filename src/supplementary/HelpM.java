@@ -4,6 +4,7 @@
  */
 package supplementary;
 
+import Logger.SimpleLoggerLight11;
 import com.jezhumble.javasysmon.JavaSysMon;
 import com.jezhumble.javasysmon.ProcessInfo;
 import java.io.BufferedReader;
@@ -23,6 +24,7 @@ import java.util.Calendar;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static program_starter.Standard.LOG_MAIN;
 
 /**
  *
@@ -155,12 +157,44 @@ public class HelpM {
         ProcessInfo[] pinfo = monitor.processTable();
         for (int i = 0; i < pinfo.length; i++) {
             String pname = pinfo[i].getName();
+//            SimpleLoggerLight11.logg(LOG_MAIN, "win: " + pname + "  /my: " + processName);
             if (pname.toLowerCase().equals(processName.toLowerCase())) {
                 return true;
             }
 
         }
         return false;
+    }
+    
+    public static boolean processRunningB(String processName) throws IOException {
+        String[] cmd = {"query.exe", "process"};//c:/windows/system32/query.exe
+
+        String line;
+        InputStream stdout;
+
+        // launch EXE and grab stdin/stdout and stderr
+        Process process = Runtime.getRuntime().exec(cmd);
+        stdout = process.getInputStream();
+
+        // clean up if any output in stdout
+        BufferedReader brCleanUp = new BufferedReader(new InputStreamReader(stdout));
+        while ((line = brCleanUp.readLine()) != null) {
+            String pattern_1 = processName; //this means that this session belongs to my active session
+            System.out.println("" +line.toLowerCase());
+            if (line.toLowerCase().contains(pattern_1.toLowerCase())) {
+                return true;
+            }
+        }
+        brCleanUp.close();
+        return false;
+    }
+    
+    public static void main(String[] args) {
+        try {
+            System.out.println("running: " + processRunningB("quick.exe"));
+        } catch (IOException ex) {
+            Logger.getLogger(HelpM.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public static void terminate_process_no_external_apps_in_use(String processName) {
