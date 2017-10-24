@@ -46,9 +46,10 @@ public class RestarterAgentTrigger implements Runnable {
 
     private void runCrashRestarter() {
         RESTARTER_IN_USE = true;
+        //
         JavaSysMon monitor = new JavaSysMon();
         int pid = monitor.currentPid();
-        monitor = null;
+        //
         String[] commands2 = {"java", "-jar", "progrestarter.jar",
             "" + pid, "" + PORT, PATH_TO_TRAY_ICON, PROGRAM_NAME, PROGRAM_NAME_RUN,PROGRAM_ARG,TRAY_ENABLED};
         try {
@@ -76,7 +77,9 @@ public class RestarterAgentTrigger implements Runnable {
      * Cannot be SYNCHRONIZED!
      */
     private void recive() throws IOException, ClassNotFoundException {
-        ObjectInputStream input = null;
+        //
+        ObjectInputStream input;
+        //
         input = new ObjectInputStream(socket.getInputStream());
 
         String restarter_pid = (String) input.readObject();
@@ -86,8 +89,9 @@ public class RestarterAgentTrigger implements Runnable {
         } catch (Exception ex) {
             Logger.getLogger(RestarterAgentTrigger.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //
         socket.close();
-        input = null;
+        //
     }
 
     /**

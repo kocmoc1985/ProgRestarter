@@ -21,7 +21,6 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import supplementary.HelpM;
 
 /**
  * This an advanced Restarter agent with abilities to monitor(it can restart the
@@ -164,8 +163,9 @@ class CR implements Runnable {
      * @param name
      */
     private void runJavaApp(String name, String argument) {//String name 
-
+        //
         String[] commands2 = {"java", "-jar", name, argument};
+        //
         try {
             Process p = Runtime.getRuntime().exec(commands2);
         } catch (IOException ex) {
@@ -175,7 +175,9 @@ class CR implements Runnable {
     }
 
     private boolean programRunning() {
+        //
         ProcessInfo[] pinfo = monitor.processTable();
+        //
         for (ProcessInfo info : pinfo) {
             if (info.getPid() == npm_pid) {
                 return true;
