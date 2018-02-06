@@ -64,6 +64,8 @@ public class ProgramCloser_C extends Standard {
                     SimpleLoggerLight11.logg(LOG_MAIN, "Closed: " + programName);
                 }
             }
+        }else{
+            System.out.println("TIME: " + get_proper_time_same_format_on_all_computers());
         }
         //
     }
@@ -73,7 +75,7 @@ public class ProgramCloser_C extends Standard {
 
         while (true) {
             //
-            wait_(60000);
+            wait_(40000);
             //
             try {
                 go();
