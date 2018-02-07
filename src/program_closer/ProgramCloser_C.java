@@ -75,7 +75,7 @@ public class ProgramCloser_C extends Standard {
 
         while (true) {
             //
-            wait_(40000);
+            wait_(30000);
             //
             try {
                 go();
