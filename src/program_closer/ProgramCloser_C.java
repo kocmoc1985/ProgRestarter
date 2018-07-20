@@ -29,7 +29,7 @@ public class ProgramCloser_C extends Standard {
 
     public ProgramCloser_C(boolean runEmbeded) {
         super(runEmbeded);
-        define_programs_to_run();
+        define_programs_to_close();
         startThread();
     }
 
@@ -45,7 +45,7 @@ public class ProgramCloser_C extends Standard {
         //
     }
 
-    private void define_programs_to_run() {
+    private void define_programs_to_close() {
         for (int i = 1; p.getProperty("program_to_close_" + i) != null; i++) {
             String prog_name = p.getProperty("program_to_close_" + i);
             if (prog_name.trim().isEmpty() == false) {
