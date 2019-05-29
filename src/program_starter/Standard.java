@@ -37,6 +37,8 @@ public class Standard implements Runnable {
     private SystemTray tray;
     private TrayIcon trayIcon;
     private JavaSysMon monitor = new JavaSysMon();
+    public int INITIAL_DELAY_USED_AT_START_UP_MIN;
+    public boolean INITIAL_DELAY_ONE_TIME_FLAG = false;
     public int INTERVALL_MIN;
     public String USERNAME;
     public boolean START_CHECK_A;
@@ -111,6 +113,7 @@ public class Standard implements Runnable {
 
     private void load_properties() {
         p = HelpM.properties_load_properties(PROPERTIES_PATH);
+        INITIAL_DELAY_USED_AT_START_UP_MIN = Integer.parseInt(p.getProperty("initial_delay", "0"));
         INTERVALL_MIN = Integer.parseInt(p.getProperty("intervall_min", "1"));
         USERNAME = p.getProperty("username_session", "");
         START_CHECK_A = Boolean.parseBoolean(p.getProperty("start_check_a", "false"));

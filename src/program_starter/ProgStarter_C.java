@@ -79,6 +79,15 @@ public class ProgStarter_C extends Standard {
     @Override
     public void run() {
         while (true) {
+            //
+            if(INITIAL_DELAY_ONE_TIME_FLAG == false){
+                //
+                wait_(INITIAL_DELAY_USED_AT_START_UP_MIN * 60000);
+                //
+                INITIAL_DELAY_ONE_TIME_FLAG = true;
+                //
+            }
+            //
             try {
                 go();
             } catch (IOException ex) {
