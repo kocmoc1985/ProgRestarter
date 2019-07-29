@@ -21,7 +21,6 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import supplementary.GP;
 import supplementary.HelpM;
-import supplementary.OtherInstanceRunning;
 
 /**
  *
@@ -87,12 +86,12 @@ public class Standard implements Runnable {
 
     public void A() {
         //
-        new Thread(new OtherInstanceRunning(5555, "")).start();
-        //
-        if (HelpM.getLoggedInUserName().equals(USERNAME) == false) {
-            SimpleLoggerLight11.logg(LOG_MAIN, "Username not as required: exiting");
-            System.exit(0);
-        }
+//        new Thread(new OtherInstanceRunning(5555, "")).start();
+//        //
+//        if (HelpM.getLoggedInUserName().equals(USERNAME) == false) {
+//            SimpleLoggerLight11.logg(LOG_MAIN, "Username not as required: exiting");
+//            System.exit(0);
+//        }
         //
     }
 
@@ -133,6 +132,24 @@ public class Standard implements Runnable {
             SimpleLoggerLight11.logg(LOG_MAIN, "Console session = true");
         }
     }
+    
+    public synchronized void wait_(int millis) {
+        //
+        if(millis == 0){
+            millis = 1;
+        }
+        //
+        try {
+            wait(millis);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ProgStarter_C.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void wait_minutes(int minutes){
+        wait_(minutes * 60000);
+    }
+    
 
     private void toTray() {
         if (SystemTray.isSupported()) {

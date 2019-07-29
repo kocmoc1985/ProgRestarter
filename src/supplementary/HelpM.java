@@ -7,6 +7,7 @@ package supplementary;
 import Logger.SimpleLoggerLight11;
 import com.jezhumble.javasysmon.JavaSysMon;
 import com.jezhumble.javasysmon.ProcessInfo;
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -244,5 +245,14 @@ public class HelpM {
         } catch (InterruptedException ex) {
             Logger.getLogger(HelpM.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+     public static boolean file_exists(String path) {
+        File f = new File(path);
+        return f.exists();
+    }
+    
+    public static void run_application_with_associated_application(File file) throws IOException {
+        Desktop.getDesktop().open(file);
     }
 }

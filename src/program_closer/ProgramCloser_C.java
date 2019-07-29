@@ -91,15 +91,7 @@ public class ProgramCloser_C extends Standard {
         return formatter.format(calendar.getTime());
     }
 
-    private void wait_(int millis) {
-        synchronized (this) {
-            try {
-                wait(millis);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(ProgramCloser_C.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
+    
 
     public static void main(String[] args) {
         HelpM.err_output_to_file();

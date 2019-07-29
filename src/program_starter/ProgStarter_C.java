@@ -97,13 +97,7 @@ public class ProgStarter_C extends Standard {
         }
     }
 
-    private synchronized void wait_(int millis) {
-        try {
-            wait(millis);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ProgStarter_C.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    
 
     public static void main(String[] args) {
         //
