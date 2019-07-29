@@ -29,4 +29,8 @@ public class Program {
     public String getProgram_name() {
         return program_name;
     }
+    
+    public String getServiceName(){
+        return program_name;
+    }
 }

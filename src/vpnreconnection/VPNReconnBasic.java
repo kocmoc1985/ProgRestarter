@@ -21,7 +21,6 @@ public class VPNReconnBasic extends Standard {
         load_add_props();
     }
 
-    
 
     private void load_add_props() {
         //
