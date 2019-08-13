@@ -205,7 +205,7 @@ public class HelpM {
         for (int i = 0; i < pinfo.length; i++) {
             String pname = pinfo[i].getName();
             int pid = pinfo[i].getPid();
-            if (pname.equals(processName)) {
+             if (pname.toLowerCase().equals(processName.toLowerCase())) {
                 monitor.killProcess(pid);
             }
         }
@@ -255,4 +255,6 @@ public class HelpM {
     public static void run_application_with_associated_application(File file) throws IOException {
         Desktop.getDesktop().open(file);
     }
+    
+    
 }
