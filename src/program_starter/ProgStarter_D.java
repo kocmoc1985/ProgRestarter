@@ -5,7 +5,6 @@
  */
 package program_starter;
 
-import Logger.SimpleLoggerLight11;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -15,23 +14,46 @@ import supplementary.SqlTypeNotSpecifiedException;
 import supplementary.Sql_B;
 
 /**
- *
+ * This module was initially done for SriLanka. This module implements function
+ * of monitoring sql database. The Control porgram writes the watchdog to the sql db
+ * and this module checks this watchdog. If the watchdog is not updated it ends
+ * the control program
  * @author KOCMOC
  */
 public class ProgStarter_D extends ProgStarter_C {
 
+    private int AMMOUNT_OF_LINES;
+    private String CONTROL_NAME_PREFIX;
+    private String SQL_TYPE;
+    private String HOST;
+    private String PORT;
+    private String DB_NAME;
+    private String SQL_USER;
+    private String SQL_PASS;
+
     public ProgStarter_D(boolean runEmbeded) {
         super(runEmbeded);
+        load_add_props();
         startSqlMonitoringThreads();
+    }
+
+    private void load_add_props() {
+        AMMOUNT_OF_LINES = Integer.parseInt(p.getProperty("ammount_of_lines", "2"));
+        CONTROL_NAME_PREFIX = p.getProperty("control_name_prefix", "Control");
+        SQL_TYPE = p.getProperty("sql_type", "mssql");
+        HOST = p.getProperty("sql_host", "");
+        PORT = p.getProperty("sql_port", "1433");
+        DB_NAME = p.getProperty("sql_db_name", "");
+        SQL_USER = p.getProperty("sql_user", "");
+        SQL_PASS = p.getProperty("sql_pass", "");
     }
 
     private void startSqlMonitoringThreads() {
         //
-        Thread x1 = new Thread(new SqlWatchDogMonitoringThread(1));
-        x1.start();
-        //
-        Thread x2 = new Thread(new SqlWatchDogMonitoringThread(2));
-        x2.start();
+        for (int i = 0; i < AMMOUNT_OF_LINES; i++) {
+            Thread x = new Thread(new SqlWatchDogMonitoringThread((i + 1)));
+            x.start();
+        }
         //
     }
 
@@ -49,7 +71,7 @@ public class ProgStarter_D extends ProgStarter_C {
 
         private void connect() {
             try {
-                sql_b.connect(Sql_B.SQL_TYPE_MSSQL, "10.143.3.61", "1433", "Mixcont", "mixcont", "mixcont");
+                sql_b.connect(SQL_TYPE, HOST, PORT, DB_NAME, SQL_USER, SQL_PASS);
 //                sql_b.connect(Sql_B.SQL_TYPE_MSSQL, "10.87.0.2", "1433", "Lanka", "sa", "");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ProgStarter_D.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,7 +89,7 @@ public class ProgStarter_D extends ProgStarter_C {
                 //
                 try {
                     if (check()) {
-                        String progName = "Control" + LINE + ".exe";
+                        String progName = CONTROL_NAME_PREFIX + LINE + ".exe";
                         HelpM.terminate_process_no_external_apps_in_use(progName);
 //                        SimpleLoggerLight11.logg("test.txt", "TERMINATE:" + progName + "  / LINE: " + LINE);
                     }
