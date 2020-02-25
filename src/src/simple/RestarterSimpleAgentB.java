@@ -18,8 +18,7 @@ import supplementary.HelpM;
  * those projects that uses the update technology
  *
  * The Example of how to run the UPDATER -> where "name" is the name of program
- * to restart & "arg" argument 
- * private static void run_java_app(String name,
+ * to restart & "arg" argument private static void run_java_app(String name,
  * String arg) { wait_(100); String[] commands2 = {"java", "-jar",
  * "updater.jar", name, arg}; try { Process p =
  * Runtime.getRuntime().exec(commands2); } catch (IOException ex) {
@@ -212,17 +211,19 @@ public class RestarterSimpleAgentB extends FileLogger {
     }
 
     private void run_application_exe_or_jar(String application_to_run_name, String path) throws IOException {
-        String[] commands = new String[3];
+        String[] commands = new String[4];
         if (application_to_run_name.contains(".jar")) {
             commands[0] = "java";
-            commands[1] = "-jar";
-            commands[2] = application_to_run_name;
+            commands[1] = "-Xmx1G";
+            commands[2] = "-jar";
+            commands[3] = application_to_run_name;
         } else {
             commands[0] = path + "/" + application_to_run_name;
             commands[1] = "";
             commands[2] = "";
+            commands[3] = "";
         }
-        SimpleLoggerLight11.logg(LOG_FILE, "run_application_exe_or_jar -> app_name = " + application_to_run_name + " -> path " + path);
+        SimpleLoggerLight11.logg(LOG_FILE, "Run_application_exe_or_jar -> app_name = " + application_to_run_name + " -> path " + path);
         ProcessBuilder builder = new ProcessBuilder(commands);
         builder.directory(new File(path));
         builder.start();
