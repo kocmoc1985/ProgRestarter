@@ -92,7 +92,7 @@ class CR implements Runnable {
         //
         if (giveNpmMyPid()) {
             startThread();
-        }else{
+        } else {
             System.exit(0);
         }
     }
@@ -136,13 +136,17 @@ class CR implements Runnable {
     }
 
     private void connect() {
+        //
+        int timeout = 200;
+        //
         for (int i = 0; i < 10; i++) {
             try {
                 socket = new Socket("localhost", NPM_PORT);
                 SimpleLoggerLight11.logg(LOGG_FILE, "Connection to NPMS on port: " + NPM_PORT + " succeded");
                 break;
             } catch (Exception ex) {
-                wait_(200);
+                wait_(timeout);
+                timeout += 200;
                 SimpleLoggerLight11.logg(LOGG_FILE, "Connection to NPMS on port: " + NPM_PORT + " failed");
                 Logger.getLogger(CR.class.getName()).log(Level.SEVERE, null, ex);
             }
