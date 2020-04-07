@@ -21,6 +21,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import udp.Server_UDP;
+import udp.ShowMessage;
 
 /**
  * This an advanced Restarter agent with abilities to monitor(it can restart the
@@ -33,6 +35,8 @@ import java.util.logging.Logger;
  */
 public class RestarterAdvancedAgent {
 
+    private static CR RestarterAgentCR;
+    
     public static void main(String[] args) {
 //        HelpM.err_output_to_file();
         if (args.length == 0) {
@@ -47,11 +51,16 @@ public class RestarterAdvancedAgent {
         String programArg = args[5];
         boolean trayEnabled = Boolean.parseBoolean(args[6]);
 //        JOptionPane.showMessageDialog(null, "CR running: pid_recieved = " + npm_pid);
-        CR cr = new CR(pid, port, trayIconPath, programName, programNameRun, programArg, trayEnabled);
+        RestarterAgentCR = new CR(pid, port, trayIconPath, programName, programNameRun, programArg, trayEnabled);
     }
+    
+    public static void restartNpms(){
+        RestarterAgentCR.restartNpms();
+    }
+    
 }
 
-class CR implements Runnable {
+ class CR implements Runnable {
 
     private int NPM_PORT;
     private JavaSysMon monitor = new JavaSysMon();
@@ -90,11 +99,24 @@ class CR implements Runnable {
         //
         toTray();
         //
+        //
         if (giveNpmMyPid()) {
-            startThread();
+            startThread(); // Starting TCP CLIENT
+            startUdpServer(); // Starting UDP SERVER
         } else {
             System.exit(0);
         }
+    }
+    
+    private void startUdpServer(){
+        ShowMessage out = new ShowMessage() {
+            @Override
+            public void showMessage(String str) {
+                SimpleLoggerLight11.logg("restarter_udp.log", str);
+            }
+        };
+        ServerProtocolRestarterAdvAgent spraa = new ServerProtocolRestarterAdvAgent(out);
+        Server_UDP server_UDP = new Server_UDP(65534, spraa, out);
     }
 
     private void startThread() {
@@ -189,6 +211,10 @@ class CR implements Runnable {
         }
         return false;
     }
+    
+    public void restartNpms(){
+        monitor.killProcess(npm_pid);
+    }
 
     private void toTray() {
         if (trayEnabled == false) {
@@ -222,7 +248,6 @@ class CR implements Runnable {
 
             try {
                 tray.add(trayIcon);
-
             } catch (AWTException e) {
                 Logger.getLogger(RestarterAdvancedAgent.class.getName()).log(Level.SEVERE, null, e);
             }
