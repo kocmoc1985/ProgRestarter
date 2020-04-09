@@ -60,6 +60,10 @@ public class RestarterAdvancedAgent {
     
 }
 
+/**
+ * IS [***CLIENT***]
+ * @author KOCMOC
+ */
  class CR implements Runnable {
 
     private int NPM_PORT;
