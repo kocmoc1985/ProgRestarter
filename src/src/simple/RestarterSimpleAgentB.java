@@ -139,8 +139,11 @@ public class RestarterSimpleAgentB extends FileLogger {
             runJavaApp(ARGUMENT_1, "skip_update"); //and then run program with skip_update argument
         } else if (ARGUMENT_1.contains(".jar") && ARGUMENT_2.equals("skip_update")) { // updating of program
             delete_old_rename_new(ARGUMENT_1);
-
-//        wait_(60001); //needed for the "Backuper" modul of MCAutoStarter, otherwise it will start and do backup aggain as the time is still the same!!
+            // wait_(60001); //needed for the "Backuper" modul of MCAutoStarter, otherwise it will start and do backup aggain as the time is still the same!!
+            runJavaApp(ARGUMENT_1, ARGUMENT_2);
+        } else if (ARGUMENT_1.contains(".jar") && ARGUMENT_2.equals("dont_skip_update")) { // updating of program
+            delete_old_rename_new(ARGUMENT_1);
+            // wait_(60001); //needed for the "Backuper" modul of MCAutoStarter, otherwise it will start and do backup aggain as the time is still the same!!
             runJavaApp(ARGUMENT_1, ARGUMENT_2);
         } else if (ARGUMENT_1.contains(".exe") || ARGUMENT_1.contains(".jar")) {
 //            run_application_exe(ARGUMENT_1);
