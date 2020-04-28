@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 import supplementary.HelpM;
 
 /**
+ * THIS ONE IS ALSO CALLED "UPDATER" AND USED BY NETPROCMONITOR & RDPCOMSERVER [2020-04-28]
+ * 
  * USED BY %MILLS_BROWSER% & BY %NET_PROC_MON% IS ALSO CALLED UPDATER This will
  * suit my updated update mechanisms. This suits NetProcMonitor & MillsBrowser &
  * those projects that uses the update technology
@@ -141,9 +143,8 @@ public class RestarterSimpleAgentB extends FileLogger {
             delete_old_rename_new(ARGUMENT_1);
             // wait_(60001); //needed for the "Backuper" modul of MCAutoStarter, otherwise it will start and do backup aggain as the time is still the same!!
             runJavaApp(ARGUMENT_1, ARGUMENT_2);
-        } else if (ARGUMENT_1.contains(".jar") && ARGUMENT_2.equals("dont_skip_update")) { // updating of program
+        } else if (ARGUMENT_1.contains(".jar") && ARGUMENT_2.equals("dont_skip_update")) { // [2020-04-27]
             delete_old_rename_new(ARGUMENT_1);
-            // wait_(60001); //needed for the "Backuper" modul of MCAutoStarter, otherwise it will start and do backup aggain as the time is still the same!!
             runJavaApp(ARGUMENT_1, ARGUMENT_2);
         } else if (ARGUMENT_1.contains(".exe") || ARGUMENT_1.contains(".jar")) {
 //            run_application_exe(ARGUMENT_1);
