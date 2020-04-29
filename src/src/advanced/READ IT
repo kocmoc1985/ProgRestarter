@@ -2,3 +2,6 @@
 [2020-04-09]
 RestarterAgentTrigger  ------> SERVER
 RestarterAdvancedAgent ------> CLIENT
+
+[2020-04-29]
+RestarterAdvancedAgent module -> is called "progrestarter.jar" in real-life
