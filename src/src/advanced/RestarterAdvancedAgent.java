@@ -21,6 +21,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import supplementary.HelpM;
 import udp.Server_UDP;
 import udp.ShowMessage;
 
@@ -36,9 +37,13 @@ import udp.ShowMessage;
 public class RestarterAdvancedAgent {
 
     private static CR RestarterAgentCR;
-    
+
     public static void main(String[] args) {
-//        HelpM.err_output_to_file();
+        //Introduced on [2020-05-15]
+        if (HelpM.runningInNetBeans()==false) {
+            HelpM.err_output_to_file();
+        }
+        //
         if (args.length == 0) {
             System.exit(0);
         }
@@ -53,18 +58,19 @@ public class RestarterAdvancedAgent {
 //        JOptionPane.showMessageDialog(null, "CR running: pid_recieved = " + npm_pid);
         RestarterAgentCR = new CR(pid, port, trayIconPath, programName, programNameRun, programArg, trayEnabled);
     }
-    
-    public static void restartNpms(){
+
+    public static void restartNpms() {
         RestarterAgentCR.restartNpms();
     }
-    
+
 }
 
 /**
  * IS [***CLIENT***]
+ *
  * @author KOCMOC
  */
- class CR implements Runnable {
+class CR implements Runnable {
 
     private int NPM_PORT;
     private JavaSysMon monitor = new JavaSysMon();
@@ -111,8 +117,8 @@ public class RestarterAdvancedAgent {
             System.exit(0);
         }
     }
-    
-    private void startUdpServer(){
+
+    private void startUdpServer() {
         ShowMessage out = new ShowMessage() {
             @Override
             public void showMessage(String str) {
@@ -198,7 +204,7 @@ public class RestarterAdvancedAgent {
         //
         try {
             Process p = Runtime.getRuntime().exec(commands2);
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             SimpleLoggerLight11.logg(LOGG_FILE, "Failed to run program: " + name + "  argument: " + argument);
             Logger.getLogger(RestarterAdvancedAgent.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -215,8 +221,8 @@ public class RestarterAdvancedAgent {
         }
         return false;
     }
-    
-    public void restartNpms(){
+
+    public void restartNpms() {
         monitor.killProcess(npm_pid);
     }
 
@@ -252,7 +258,7 @@ public class RestarterAdvancedAgent {
 
             try {
                 tray.add(trayIcon);
-            } catch (AWTException e) {
+            } catch (Exception e) {
                 Logger.getLogger(RestarterAdvancedAgent.class.getName()).log(Level.SEVERE, null, e);
             }
         }

@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,6 +33,34 @@ import static program_starter.Standard.LOG_MAIN;
  * @author KOCMOC
  */
 public class HelpM {
+    
+    /**
+     * SUPER GOOD Found [2020-04-29] Introduced in this Project [2020-05-15]
+     *
+     * @return
+     */
+    public static boolean runningInNetBeans() {
+        //
+        File currentJar = null;
+        //
+        try {
+            currentJar = new File(HelpM.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(HelpM.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //
+        if (currentJar == null) {
+            return false; // As it was running from ".jar" to make output to file
+        }
+        //
+        /* is it a jar file? */
+        if (!currentJar.getName().endsWith(".jar")) {
+            return true;
+        } else {
+            return false;
+        }
+        //
+    }
 
     public static void err_output_to_file() {
         //Write error stream to a file
