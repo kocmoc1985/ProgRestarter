@@ -215,17 +215,19 @@ public class RestarterSimpleAgentB extends FileLogger {
     }
 
     private void run_application_exe_or_jar(String application_to_run_name, String path) throws IOException {
-        String[] commands = new String[4];
+        String[] commands = new String[5];
         if (application_to_run_name.contains(".jar")) {
             commands[0] = "java";
-            commands[1] = "-Xmx1G";
+            commands[1] = "-Xmx1G"; // This makes that the program is launched with additional RAM memory assigned
             commands[2] = "-jar";
             commands[3] = application_to_run_name;
+            commands[4] = "1997"; // type of password [2021-03-18]
         } else {
             commands[0] = path + "/" + application_to_run_name;
-            commands[1] = "";
+            commands[1] = "1997"; // type of password [2021-03-18]
             commands[2] = "";
             commands[3] = "";
+            commands[4] = "";
         }
         SimpleLoggerLight11.logg(LOG_FILE, "Run_application_exe_or_jar -> app_name = " + application_to_run_name + " -> path " + path);
         ProcessBuilder builder = new ProcessBuilder(commands);
