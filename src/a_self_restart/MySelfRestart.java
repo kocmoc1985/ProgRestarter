@@ -17,12 +17,12 @@ import supplementary.HelpM;
  *
  * @author KOCMOC
  */
-public class MyRestart extends javax.swing.JFrame {
+public class MySelfRestart extends javax.swing.JFrame {
 
     /**
      * Creates new form MyRestart
      */
-    public MyRestart() {
+    public MySelfRestart() {
         initComponents();
     }
 
@@ -98,7 +98,7 @@ public class MyRestart extends javax.swing.JFrame {
         try {
             restartApplication_with_output();
         } catch (Exception ex) {
-            Logger.getLogger(MyRestart.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MySelfRestart.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -108,7 +108,7 @@ public class MyRestart extends javax.swing.JFrame {
 
     private void restartApplication_with_output() throws URISyntaxException, IOException {
         final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
-        final File currentJar = new File(MyRestart.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+        final File currentJar = new File(MySelfRestart.class.getProtectionDomain().getCodeSource().getLocation().toURI());
         //
         jTextArea1.append("javaBin: " + javaBin + "\n\n");
         jTextArea1.append("currentJar: " + currentJar + "\n\n");
@@ -127,7 +127,7 @@ public class MyRestart extends javax.swing.JFrame {
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(MyRestart.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MySelfRestart.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 //
                 /* Build command: java -jar application.jar */
@@ -139,7 +139,7 @@ public class MyRestart extends javax.swing.JFrame {
                 try {
                     builder.start();
                 } catch (IOException ex) {
-                    Logger.getLogger(MyRestart.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MySelfRestart.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 System.exit(0);
             }
@@ -179,7 +179,7 @@ public class MyRestart extends javax.swing.JFrame {
 
     private void restartApplication() throws Exception {
         final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
-        final File currentJar = new File(MyRestart.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+        final File currentJar = new File(MySelfRestart.class.getProtectionDomain().getCodeSource().getLocation().toURI());
 
         /* is it a jar file? */
         if (!currentJar.getName().endsWith(".jar")) {
@@ -214,20 +214,21 @@ public class MyRestart extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MyRestart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MySelfRestart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MyRestart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MySelfRestart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MyRestart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MySelfRestart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MyRestart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MySelfRestart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MyRestart().setVisible(true);
+                new MySelfRestart().setVisible(true);
             }
         });
     }
